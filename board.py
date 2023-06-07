@@ -21,7 +21,7 @@ class Board:
 						text += 'b '
 			text += '\n'
 		return text
-							
+	
 	def insert_piece(self, coords : Coords, piece : Piece) -> None:
 		self.board[coords.row][coords.col] = piece
 
