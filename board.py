@@ -29,6 +29,9 @@ class Board:
 			text += '\n'
 		return text
 	
+	def get_piece(self, coords : Coords) -> Piece:
+		return self.board[coords.row][coords.col]
+	
 	def insert_piece(self, coords : Coords, piece : Piece) -> None:
 		self.board[coords.row][coords.col] = piece
 
