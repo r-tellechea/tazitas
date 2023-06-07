@@ -5,13 +5,18 @@ from color import Color
 
 @dataclass
 class StartDisplay:
-    pieces : tuple[Piece]
-    player : Player
+	pieces : tuple[Piece]
+	player : Player
 
-    def __init__(self, pieces : tuple[Piece]) -> None:
-        self.pieces = pieces
+	def __init__(self, pieces : tuple[Piece]) -> None:
+		self.pieces = pieces
 
-basic_display = StartDisplay(pieces=tuple(
-    [Piece(player=Player(1), color=Color('red'))  for _ in range(4)] + 
-    [Piece(player=Player(1), color=Color('blue')) for _ in range(4)]
+basic_display_0 = StartDisplay(pieces=tuple(
+	[Piece(player=Player(), color=Color('red'))  for _ in range(4)] + 
+	[Piece(player=Player(), color=Color('blue')) for _ in range(4)]
+))
+
+basic_display_1 = StartDisplay(pieces=tuple(
+	[Piece(player=~Player(), color=Color('red'))  for _ in range(4)] + 
+	[Piece(player=~Player(), color=Color('blue')) for _ in range(4)]
 ))

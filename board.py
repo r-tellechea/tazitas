@@ -1,8 +1,11 @@
+import pandas as pd
+
 from color import Color
 from piece import Piece
 from player import Player
 from coords import Coords, start_display_coords
 from start_display import StartDisplay
+from board_to_dataframe import board_to_dataframe
 
 class Board:
 	"""Tablero del juego. Cuenta con:
@@ -32,3 +35,6 @@ class Board:
 	def insert_start_display (self, player : Player, start_display : StartDisplay) -> None:
 		for coords, piece in zip(start_display_coords(player), start_display.pieces):
 			self.insert_piece(coords=coords, piece=piece)
+
+	def df(self, player : Player=None) -> pd.DataFrame:
+		return board_to_dataframe(board=self, player=player)
