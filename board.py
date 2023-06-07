@@ -1,10 +1,14 @@
 from color import Color
 from piece import Piece
 from player import Player
-from coords import Coords, display_coords
-from display import Display
+from coords import Coords, start_display_coords
+from start_display import StartDisplay
 
 class Board:
+	"""Tablero del juego. Cuenta con:
+	 - insert_piece: Colorcar una pieza concreta en unas coordenadas
+	 - insert_display: Colorcar una configuración inicial en el lado de uno de los jugadores.
+	"""
 	def __init__(self) -> None:
 		self.board = [[None for __ in range(6)] for _ in range (6)]
 
@@ -25,6 +29,6 @@ class Board:
 	def insert_piece(self, coords : Coords, piece : Piece) -> None:
 		self.board[coords.row][coords.col] = piece
 
-	def insert_display (self, player : Player, display : Display) -> None:
-		for coords, piece in zip(display_coords(player), display.pieces):
+	def insert_start_display (self, player : Player, start_display : StartDisplay) -> None:
+		for coords, piece in zip(start_display_coords(player), start_display.pieces):
 			self.insert_piece(coords=coords, piece=piece)

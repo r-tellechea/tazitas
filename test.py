@@ -1,9 +1,9 @@
 #%%
 from board import Board
 from player import Player
-from display import basic_display
+from start_display import basic_display
 
-b = Board()
-b.insert_display(Player(), basic_display)
-b.insert_display(~Player(), basic_display)
-print(b)
+board = Board()
+board.insert_start_display(Player(), basic_display)
+board.insert_start_display(~Player(), basic_display)
+print(board)

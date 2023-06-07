@@ -15,5 +15,6 @@ class Direction:
 			case 3: 
 				return '←'
 
+	# Devuelve la lista de todas las direcciones
 	def nesw() -> list:
 		return [Direction(dir) for dir in range(4)]
