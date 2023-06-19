@@ -40,31 +40,47 @@ class Board:
 	
 	def is_piece_of_player(self, coords : Coords, player : Player) -> bool:
 		if not self.is_piece(coords):
-			raise ValueError('There is not piece in the selected cell.')
-		return self.get_piece(coords).player == player
+			raise ValueError('There is not a piece in the selected cell.')
+		return self.get_piece(coords).get_player() == player
 
 	def insert_start_display (self, player : Player, start_display : StartDisplay) -> None:
 		for coords, piece in zip(start_display_coords(player), start_display.pieces):
 			self.set_piece(coords=coords, piece=piece)
 		
 	def check_victory(self) -> Player:
-		#TODO
+		# TODO
 		# Devuelve None si la partida sigue o un jugador si éste gana.
 		pass
 
+	def is_edge_of_player(player : Player, coords : Coords) -> bool:
+		if player == Player():
+			if coords in [Coords(5,0),Coords(5,5)]:
+				return True
+			return False
+		if player == ~Player():
+			if coords in [Coords(0,0),Coords(0,5)]:
+				return True
+			return False
+
 	def move_piece(self, start_coords : Coords, end_coords : Coords):
-		#TODO
-		# Comprobar:
 		# - Las coordenadas de origen corresponden a una pieza.
+		if not self.is_piece(start_coords):
+			raise ValueError('There is not a piece in the selected cell.')
 		# - Las coordenadas de destino está en la lista de casillas disponibles para la pieza.
+		if end_coords not in start_coords.nesw():
+			raise Exception('That move is not allowed.')
 		# - En caso de que haya una pieza en el destino no puede ser del mismo jugador.
+		if not self.is_piece(end_coords) and self.is_piece_of_player(end_coords,self.get_piece(start_coords).get_player()):
+			raise Exception('You cannot caputre your own piece.')
 		# - Cosas de las esquinas
-
+		if self.is_edge_of_player(self.get_piece(start_coords).get_player(), end_coords):
+			raise Exception('You cannot move to the edges of your side of the board.')
 		# Copiar pieza en la casilla de destino.
+		self.set_piece(end_coords,self.get_piece(start_coords))
 		# Poner vacía la casilla de origen.
-
+		self.set_piece(start_coords)
+		# TODO
 		# Comprobar victorias.
-
 		pass
 
 	def df(self, player : Player=None) -> pd.DataFrame:
