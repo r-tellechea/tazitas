@@ -6,3 +6,6 @@ from color import Color
 class Piece:
     player : Player
     color  : Color
+
+    def get_player(self) -> Player:
+        return self.player
