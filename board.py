@@ -68,13 +68,13 @@ class Board:
 			raise ValueError('There is not a piece in the selected cell.')
 		# - Las coordenadas de destino está en la lista de casillas disponibles para la pieza.
 		if end_coords not in start_coords.nesw():
-			raise Exception('That move is not allowed.')
+			raise ValueError('That move is not allowed.')
 		# - En caso de que haya una pieza en el destino no puede ser del mismo jugador.
 		if not self.is_piece(end_coords) and self.is_piece_of_player(end_coords,self.get_piece(start_coords).get_player()):
-			raise Exception('You cannot caputre your own piece.')
+			raise ValueError('You cannot caputre your own piece.')
 		# - Cosas de las esquinas
 		if self.is_edge_of_player(self.get_piece(start_coords).get_player(), end_coords):
-			raise Exception('You cannot move to the edges of your side of the board.')
+			raise ValueError('You cannot move to the edges of your side of the board.')
 		# Copiar pieza en la casilla de destino.
 		self.set_piece(end_coords,self.get_piece(start_coords))
 		# Poner vacía la casilla de origen.
