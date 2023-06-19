@@ -80,6 +80,7 @@ class Board:
 		# Poner vacía la casilla de origen.
 		self.set_piece(start_coords)
 		# TODO
+		# Pasar todas las comprobaciones a su propia función
 		# Comprobar victorias.
 		pass
 
